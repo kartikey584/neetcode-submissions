@@ -1,0 +1,23 @@
+class Solution:
+    def trap(self, height: List[int]) -> int:
+
+        n = len(height)
+
+        pre = [0] * n
+        suf = [0] * n
+
+        pre[0] = height[0]
+        suf[n-1] = height[n-1]        
+        result = 0
+        for i in range(1,n):
+
+            pre[i] = max(pre[i-1],height[i])
+            suf[n-1-i] = max(suf[n-i],height[n-1-i])
+
+        # print(pre,suf)
+        for i in range(n):
+
+            result+= min(pre[i],suf[i]) - height[i]
+
+        
+        return result
